@@ -28,12 +28,18 @@ df = pd.read_csv("adidas_nikes_products_snaphost_data.csv")
 df1 = df.dropna()
 pattern = '(https:\/\/[^~|]*)'
 
-for image in df1['images']:
-    url  = re.findall(pattern,image)
+for ind in df1.index:
+    url  = re.findall(pattern,df1['images'][ind])
+    directory = re.findall("[^]"),df1['name'][ind]
+    parent_dir = "data/"
+    path = parent_dir + directory
+    if (os.path.exists(path) == False):
+        os.mkdir(path) 
+    print(path) 
     for index, link in enumerate(url):
         if(check_url(link)):
             var = requests.get(link)
             name = re.findall('([^\/.]*).jpg',link)
             if Enquiry(name):
-                with open('image/%s.png' % (name[0]), 'wb') as f:
+                with open('%s/%s.png' % (path,name[0]), 'wb') as f:
                     f.write(var.content)
