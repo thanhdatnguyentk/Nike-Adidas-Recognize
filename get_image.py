@@ -17,6 +17,11 @@ def check_url(link):
     else:
         return True
 
+def Enquiry(lis1):
+    if len(lis1) == 0:
+        return 0
+    else:
+        return 1
 
 df = pd.read_csv("adidas_nikes_products_snaphost_data.csv")
 
@@ -28,6 +33,7 @@ for image in df1['images']:
     for index, link in enumerate(url):
         if(check_url(link)):
             var = requests.get(link)
-            name = re.findall('([^\/.]*).jpg',link)[0]
-            with open('image/%s.png' % (name), 'wb') as f:
-                f.write(var.content)
+            name = re.findall('([^\/.]*).jpg',link)
+            if Enquiry(name):
+                with open('image/%s.png' % (name[0]), 'wb') as f:
+                    f.write(var.content)
