@@ -36,10 +36,10 @@ for ind in df1.index:
     if (os.path.exists(path) == False):
         os.mkdir(path) 
     print(path) 
-    for index, link in enumerate(url):
-        if(check_url(link)):
-            var = requests.get(link)
-            name = re.findall('([^\/.]*).jpg',link)
-            if Enquiry(name):
-                with open('%s/%s.png' % (path,name[0]), 'wb') as f:
-                    f.write(var.content)
+    # for index, link in enumerate(url):
+    #     if(check_url(link)):
+    #         var = requests.get(link)
+    #         name = re.findall('([^\/.]*).jpg',link)
+    #         if Enquiry(name):
+    #             with open('%s/%s.png' % (path,name[0]), 'wb') as f:
+    #                 f.write(var.content)

@@ -1,16 +1,17 @@
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import models, layers
-import matplotlib.pylot as plt 
+import os
+import pandas as pd
+from PIL import Image
+import cv2
+import numpy as np
+folder_path = 'data/'
 
-IMAGE_SIZE = 256
-BATCH_SIZE = 32
+df = pd.read_csv('adidas_nikes_products_snaphost_data.csv')
 
-dataset = tf.keras.preprocessing.image_dataset_from_directory(
-    "data",
-    shuffle = True,
-    image_size = (IMAGE_SIZE, IMAGE_SIZE),
-    batch_size = BATCH_SIZE
-)
 
-print(dataset.shape)
+for index, name in enumerate(df['name']):
+    folder_name = folder_path + name
+    if (os.path.exists(folder_name)):
+        for filename in os.listdir(folder_name):
+            file_path = os.path.join(folder_name, filename)
+            if os.path.isfile(file_path):
+                img = cv2.imread(file_path)
